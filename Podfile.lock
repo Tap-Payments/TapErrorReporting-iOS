@@ -9,6 +9,7 @@ PODS:
   - TapAdditionsKit/Foundation/Locale (1.2.2)
   - TapAdditionsKit/Foundation/NumberFormatter (1.2.2)
   - TapAdditionsKit/ObjectiveC/NSObject (1.2.2)
+  - TapAdditionsKit/QuartzCore/CAKeyframeAnimation (1.2.2)
   - TapAdditionsKit/QuartzCore/CALayer (1.2.2)
   - TapAdditionsKit/SwiftStandartLibrary/Array (1.2.2):
     - TapAdditionsKit/SwiftStandartLibrary/Numeric
@@ -27,6 +28,7 @@ PODS:
     - TapAdditionsKit/SwiftStandartLibrary/Array
     - TapAdditionsKit/SwiftStandartLibrary/Int
     - TapAdditionsKit/SwiftStandartLibrary/String
+  - TapAdditionsKit/UIKit/UIDevice (1.2.2)
   - TapAdditionsKit/UIKit/UIImage (1.2.2):
     - TapAdditionsKit/CoreGraphics/CGImage
     - TapAdditionsKit/CoreGraphics/CGSize
@@ -63,23 +65,44 @@ PODS:
   - TapAdditionsKit/UIKit/UIWindow/Level (1.2.2)
   - TapAdditionsKit/UIKit/UIWindow/UIWindow (1.2.2):
     - TapAdditionsKit/UIKit/UIWindow/Level
+  - TapAlertViewController (1.0):
+    - TapAdditionsKit/Foundation/Bundle
+    - TapAdditionsKit/ObjectiveC/NSObject
+    - TapAdditionsKit/QuartzCore/CAKeyframeAnimation
+    - TapAdditionsKit/Tap/ClassProtocol
+    - TapAdditionsKit/Tap/TypeAlias
+    - TapAdditionsKit/UIKit/UIViewController
+    - TapVisualEffectView
   - TapApplication (1.0.5):
     - TapAdditionsKit/SwiftStandartLibrary/String (>= 1.2)
     - TapAdditionsKit/Tap/ClassProtocol (>= 1.2)
     - TapAdditionsKit/UIKit/UIViewController (>= 1.2)
     - TapSwiftFixes/Threading (>= 1.0.5)
-  - TapBundleLocalization (1.0)
+  - TapBundleLocalization (1.0.1)
   - TapNetworkManager (1.2.3):
     - TapNetworkManager/Core (= 1.2.3)
   - TapNetworkManager/Core (1.2.3)
+  - TapNibView (1.0.2):
+    - TapAdditionsKit/ObjectiveC/NSObject (>= 1.2)
+    - TapAdditionsKit/Tap/ClassProtocol (>= 1.2)
+    - TapAdditionsKit/UIKit/UIView (>= 1.2)
   - TapSwiftFixes/Threading (1.0.6)
+  - TapVisualEffectView (1.1):
+    - TapAdditionsKit/Foundation/Bundle (>= 1.2)
+    - TapAdditionsKit/ObjectiveC/NSObject (>= 1.2)
+    - TapAdditionsKit/UIKit/UIColor (>= 1.2)
+    - TapAdditionsKit/UIKit/UIDevice (>= 1.2)
+    - TapAdditionsKit/UIKit/UIView (>= 1.2)
+    - TapNibView (>= 1.0.2)
 
 DEPENDENCIES:
   - SwiftLint
   - TapAdditionsKit/Foundation/Bundle
   - TapAdditionsKit/SwiftStandartLibrary/Dictionary
   - TapAdditionsKit/SwiftStandartLibrary/Encodable
+  - TapAdditionsKit/Tap/ClassProtocol
   - TapAdditionsKit/Tap/TypeAlias
+  - TapAlertViewController
   - TapApplication
   - TapBundleLocalization
   - TapNetworkManager
@@ -88,19 +111,25 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - SwiftLint
     - TapAdditionsKit
+    - TapAlertViewController
     - TapApplication
     - TapBundleLocalization
     - TapNetworkManager
+    - TapNibView
     - TapSwiftFixes
+    - TapVisualEffectView
 
 SPEC CHECKSUMS:
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
   TapAdditionsKit: 90574b9a579af6c521616ccd9703e00b23ff25b4
+  TapAlertViewController: 0389c0c347d4efbe8369d7a4e859c65ef63b6db0
   TapApplication: 7cc6f890af56ab7fe349802305920fd290869bd5
-  TapBundleLocalization: ef7db78f5e50f0df6c31be068a90e00d7847fd25
+  TapBundleLocalization: c5ef2022b67c78d657b3898882947903a8348e4b
   TapNetworkManager: d2ee58272b8a5c829ffd001fed82d4c98d8a8fda
+  TapNibView: 3f789102e629d216047f2beeb709a4d00df22e74
   TapSwiftFixes: ae748a23595698d72a73fe165aa97d12e397dabb
+  TapVisualEffectView: ea51a01ff9712389468ac5b30b196116c7d87389
 
-PODFILE CHECKSUM: 257d4a563dca21315e3debe794d4920ec88dba27
+PODFILE CHECKSUM: 7b857201b9c9d12456e6fabcca496781cdc5b322
 
 COCOAPODS: 1.6.1

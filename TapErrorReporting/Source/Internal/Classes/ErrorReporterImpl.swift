@@ -7,6 +7,9 @@
 
 import class	TapAdditionsKit.SeparateWindowRootViewController
 import struct	TapAdditionsKit.TypeAlias
+import class	TapAlertViewController.TapAlertAction
+import class	TapAlertViewController.TapAlertDoubleAction
+import class	TapAlertViewController.TapAlertViewController
 import class	TapApplication.TapApplicationPlistInfo
 import class	TapBundleLocalization.LocalizationProvider
 import struct	TapNetworkManager.TapBodyModel
@@ -40,13 +43,16 @@ internal final class ErrorReporterImpl: ErrorReporting {
 	
 	// MARK: Methods
 	
-	internal func report(_ error: Encodable, in product: String, productVersion: String, alertOrientationHandler: PermissionAlertOrientationHandler) {
+	internal func report(_ error: Encodable, in product: String, productVersion: String, alertOrientationHandler: OrientationHandler) {
 		
-		self.askUserPermissionToReport(alertOrientationHandler) { [weak self] (granted) in
+		DispatchQueue.main.async {
 			
-			guard granted else { return }
-			
-			self?.reportError(error, in: product, version: productVersion, orientationHandler: alertOrientationHandler)
+			self.askUserPermissionToReport(alertOrientationHandler) { [weak self] (granted) in
+				
+				guard granted else { return }
+				
+				self?.reportError(error, in: product, version: productVersion, orientationHandler: alertOrientationHandler)
+			}
 		}
 	}
 	
@@ -103,7 +109,7 @@ internal final class ErrorReporterImpl: ErrorReporting {
 	
 	// MARK: Methods
 	
-	private func askUserPermissionToReport(_ alertOrientationHandler: PermissionAlertOrientationHandler, _ grantedClosure: @escaping (Bool) -> Void) {
+	private func askUserPermissionToReport(_ alertOrientationHandler: OrientationHandler, _ grantedClosure: @escaping TypeAlias.BooleanClosure) {
 		
 		if UserDefaults.standard.bool(forKey: Constants.errorReportingForbiddenKey) {
 			
@@ -119,46 +125,71 @@ internal final class ErrorReporterImpl: ErrorReporting {
 		
 		let title = self.localizationProvider.localizedString(for: .alert_report_error_title)
 		let message = self.localizationProvider.localizedString(for: .alert_report_error_message)
+		let dontAskAgainText = self.localizationProvider.localizedString(for: .alert_report_error_dont_ask_again)
 		
-		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		var dontAskAgainValue = false
 		
-		let dontAllowAction = UIAlertAction(title: self.localizationProvider.localizedString(for: .alert_report_error_btn_dont_allow), style: .cancel) { [weak self, weak alert] (action) in
+		let dontAskAgainView = DontAskMeAgainView(text: dontAskAgainText, defaultValue: false) { dontAskAgainValue = $0 }
+		
+		let alert = TapAlertViewController.with(title: title, message: message)
+		alert.customView = dontAskAgainView
+		
+		let localGranted: TypeAlias.BooleanClosure = { (granted) in
 			
-			if let nonnullAlert = alert, let nonnullSelf = self {
+			if dontAskAgainValue {
 				
-				nonnullSelf.hide(nonnullAlert) {
+				if granted {
 					
-					grantedClosure(false)
+					UserDefaults.standard.setValue(true, forKey: Constants.canAutoSendReportKey)
+				}
+				else {
+					
+					UserDefaults.standard.setValue(true, forKey: Constants.errorReportingForbiddenKey)
+				}
+				
+				UserDefaults.standard.synchronize()
+			}
+			
+			grantedClosure(granted)
+		}
+		
+		let dontAllowAction = TapAlertAction(style: .default, title: self.localizationProvider.localizedString(for: .alert_report_error_btn_dont_allow)) { [weak alert] (action) in
+			
+			if let nonnullAlert = alert {
+				
+				nonnullAlert.hide {
+					
+					localGranted(false)
 				}
 			}
 			else {
 				
-				grantedClosure(false)
+				localGranted(false)
 			}
 		}
 		
-		let allowAction = UIAlertAction(title: self.localizationProvider.localizedString(for: .alert_report_error_btn_allow), style: .default) { [weak self, weak alert] (action) in
+		let allowAction = TapAlertAction(style: .bold, title: self.localizationProvider.localizedString(for: .alert_report_error_btn_allow)) { [weak alert] (action) in
 			
-			if let nonnullAlert = alert, let nonnullSelf = self {
+			if let nonnullAlert = alert {
 				
-				nonnullSelf.hide(nonnullAlert) {
+				nonnullAlert.hide {
 					
-					grantedClosure(true)
+					localGranted(true)
 				}
 			}
 			else {
 				
-				grantedClosure(true)
+				localGranted(true)
 			}
 		}
 		
-		alert.addAction(dontAllowAction)
-		alert.addAction(allowAction)
+		let doubleAction = TapAlertDoubleAction(leadingAction: dontAllowAction, trailingAction: allowAction)
+		alert.add(action: doubleAction)
 		
-		self.show(alert, orientationHandler: alertOrientationHandler)
+		alert.show(orientationHandler: alertOrientationHandler)
 	}
 	
-	private func reportError(_ error: Encodable, in product: String, version: String, orientationHandler: PermissionAlertOrientationHandler) {
+	private func reportError(_ error: Encodable, in product: String, version: String, orientationHandler: OrientationHandler) {
 		
 		var data = self.applicationMetadata
 		
@@ -184,53 +215,24 @@ internal final class ErrorReporterImpl: ErrorReporting {
 		}
 	}
 	
-	private func showSuccessAlert(_ handler: PermissionAlertOrientationHandler) {
+	private func showSuccessAlert(_ handler: OrientationHandler) {
 		
 		let title = self.localizationProvider.localizedString(for: .alert_report_error_success_title)
 		let message = self.localizationProvider.localizedString(for: .alert_report_error_success_message)
 		
-		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		let alert = TapAlertViewController.with(title: title, message: message)
 		
 		let dismissTitle = self.localizationProvider.localizedString(for: .alert_report_error_success_btn_dismiss)
-		let dismissAction = UIAlertAction(title: dismissTitle, style: .default) { [weak self, weak alert] (action) in
+		let dismissAction = TapAlertAction(style: .default, title: dismissTitle) { [weak alert] (action) in
 			
-			if let nonnullAlert = alert, let nonnullSelf = self {
+			if let nonnullAlert = alert {
 				
-				nonnullSelf.hide(nonnullAlert)
+				nonnullAlert.hide()
 			}
 		}
 		
-		alert.addAction(dismissAction)
+		alert.add(action: dismissAction)
 		
-		self.show(alert, orientationHandler: handler)
-	}
-	
-	private func show(_ alert: UIAlertController, orientationHandler: PermissionAlertOrientationHandler) {
-		
-		let appearanceClosure: TypeAlias.GenericViewControllerClosure<SeparateWindowRootViewController> = { rootController in
-			
-			let supportedOrientations	= orientationHandler.supportedInterfaceOrientations(for: rootController)
-			let canAutorotate			= orientationHandler.viewControllerShouldAutorotate(rootController)
-			let preferredOrientation	= orientationHandler.preferredInterfaceOrientationForPresentation(of: rootController)
-			
-			rootController.canAutorotate					= canAutorotate
-			rootController.allowedInterfaceOrientations		= supportedOrientations
-			rootController.preferredInterfaceOrientation	= preferredOrientation
-			
-			rootController.present(alert, animated: true, completion: nil)
-		}
-		
-		DispatchQueue.main.async {
-			
-			alert.tap_showOnSeparateWindow(below: .statusBar, using: appearanceClosure)
-		}
-	}
-	
-	internal func hide(_ alert: UIAlertController, completion: TypeAlias.ArgumentlessClosure? = nil) {
-		
-		DispatchQueue.main.async {
-			
-			alert.tap_dismissFromSeparateWindow(true, completion: completion)
-		}
+		alert.show(orientationHandler: handler)
 	}
 }

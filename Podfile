@@ -9,6 +9,7 @@ target 'TapErrorReporting' do
 	pod 'TapAdditionsKit/SwiftStandartLibrary/Encodable'
 	pod 'TapAdditionsKit/Tap/ClassProtocol'
 	pod 'TapAdditionsKit/Tap/TypeAlias'
+	pod 'TapAlertViewController'
 	pod 'TapApplication'
 	pod 'TapBundleLocalization'
 	pod 'TapNetworkManager'

@@ -16,8 +16,8 @@
 		144E0BE8223F872C0040E2A5 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 144E0BE5223F872C0040E2A5 /* en.lproj */; };
 		144E0BE9223F872C0040E2A5 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 144E0BE6223F872C0040E2A5 /* ru.lproj */; };
 		144E0BEA223F872C0040E2A5 /* ar.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 144E0BE7223F872C0040E2A5 /* ar.lproj */; };
-		144E0C0B223F9E680040E2A5 /* PermissionAlertOrientationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E0C0A223F9E680040E2A5 /* PermissionAlertOrientationHandler.swift */; };
 		144E0C0E223FA2520040E2A5 /* TapErrorReporting.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 144E0C0D223FA2520040E2A5 /* TapErrorReporting.podspec */; };
+		14F505492246D5C60077B801 /* DontAskMeAgainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F505482246D5C60077B801 /* DontAskMeAgainView.swift */; };
 		9AACFD2A3D3CB0E962F03382 /* Pods_TapErrorReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06CD90E80C298AE414EBEB90 /* Pods_TapErrorReporting.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,8 +34,8 @@
 		144E0BE5223F872C0040E2A5 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		144E0BE6223F872C0040E2A5 /* ru.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ru.lproj; sourceTree = "<group>"; };
 		144E0BE7223F872C0040E2A5 /* ar.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ar.lproj; sourceTree = "<group>"; };
-		144E0C0A223F9E680040E2A5 /* PermissionAlertOrientationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionAlertOrientationHandler.swift; sourceTree = "<group>"; };
 		144E0C0D223FA2520040E2A5 /* TapErrorReporting.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TapErrorReporting.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		14F505482246D5C60077B801 /* DontAskMeAgainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontAskMeAgainView.swift; sourceTree = "<group>"; };
 		3A31AA281C9291CA3CAB6542 /* Pods-TapErrorReporting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapErrorReporting.release.xcconfig"; path = "Target Support Files/Pods-TapErrorReporting/Pods-TapErrorReporting.release.xcconfig"; sourceTree = "<group>"; };
 		631F2FB88B0A806E83455053 /* Pods-TapErrorReporting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TapErrorReporting.debug.xcconfig"; path = "Target Support Files/Pods-TapErrorReporting/Pods-TapErrorReporting.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +87,7 @@
 			children = (
 				144E0BC4223EA9030040E2A5 /* Classes */,
 				144E0BC8223EA9030040E2A5 /* Extensions */,
+				14F505472246D5C60077B801 /* Views */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -120,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				144E0BCD223EA9030040E2A5 /* ErrorReporting.swift */,
-				144E0C0A223F9E680040E2A5 /* PermissionAlertOrientationHandler.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -159,6 +159,14 @@
 				144E0BD4223EA9B50040E2A5 /* Public */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		14F505472246D5C60077B801 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				14F505482246D5C60077B801 /* DontAskMeAgainView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C92DABBFF369F8458905746E /* Pods */ = {
@@ -289,9 +297,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				144E0BD2223EA9030040E2A5 /* LocalizationKey+ErrorReporting.swift in Sources */,
-				144E0C0B223F9E680040E2A5 /* PermissionAlertOrientationHandler.swift in Sources */,
 				144E0BCE223EA9030040E2A5 /* ErrorReporterImpl.swift in Sources */,
 				144E0BD3223EA9030040E2A5 /* ErrorReporting.swift in Sources */,
+				14F505492246D5C60077B801 /* DontAskMeAgainView.swift in Sources */,
 				144E0BD0223EA9030040E2A5 /* Bundle+ErrorReporting.swift in Sources */,
 				144E0BD7223EA9DB0040E2A5 /* ErrorReporter.swift in Sources */,
 			);
@@ -353,7 +361,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -412,7 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

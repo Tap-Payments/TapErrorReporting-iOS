@@ -6,6 +6,7 @@
 //
 
 import protocol	TapAdditionsKit.ClassProtocol
+@_exported import protocol TapAlertViewController.OrientationHandler
 
 /// Objects that an report errors should conform to this protocol.
 public protocol ErrorReporting: ClassProtocol {
@@ -23,5 +24,5 @@ public protocol ErrorReporting: ClassProtocol {
 	///   - product: Product name.
 	///   - productVersion: Product version.
 	///   - alertOrientationHandler: Permissions alert orientation handler.
-	func report(_ error: Encodable, in product: String, productVersion: String, alertOrientationHandler: PermissionAlertOrientationHandler)
+	func report(_ error: Encodable, in product: String, productVersion: String, alertOrientationHandler: OrientationHandler)
 }
