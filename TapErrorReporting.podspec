@@ -2,11 +2,11 @@ Pod::Spec.new do |tapErrorReporting|
     
     tapErrorReporting.platform				= :ios
     tapErrorReporting.ios.deployment_target	= '8.0'
-    tapErrorReporting.swift_version			= '4.2'
+    tapErrorReporting.swift_versions		= ['4.2', '5.0']
     tapErrorReporting.name					= 'TapErrorReporting'
     tapErrorReporting.summary				= 'Tap error reporting library'
     tapErrorReporting.requires_arc			= true
-    tapErrorReporting.version				= '1.0.1'
+    tapErrorReporting.version				= '1.0.2'
     tapErrorReporting.license				= { :type => 'MIT', :file => 'LICENSE' }
     tapErrorReporting.author				= { 'Tap Payments' => 'hello@tap.company' }
     tapErrorReporting.homepage				= 'https://github.com/Tap-Payments/TapErrorReporting-iOS'

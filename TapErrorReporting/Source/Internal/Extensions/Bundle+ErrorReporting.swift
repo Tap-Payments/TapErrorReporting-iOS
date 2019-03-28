@@ -7,7 +7,10 @@
 
 internal extension Bundle {
 	
-	internal static let errorReportingResources: Bundle = {
+	// MARK: - Internal -
+	// MARK: Properties
+	
+	static let errorReportingResources: Bundle = {
 		
 		guard let result = Bundle(for: ErrorReporter.self).tap_childBundle(named: Constants.errorReportingResourcesBundleName) else {
 			
@@ -16,6 +19,8 @@ internal extension Bundle {
 		
 		return result
 	}()
+	
+	// MARK: - Private -
 	
 	private struct Constants {
 		

@@ -230,6 +230,7 @@
 				TargetAttributes = {
 					144E0BB7223C470D0040E2A5 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -241,6 +242,7 @@
 				en,
 				ru,
 				ar,
+				Base,
 			);
 			mainGroup = 144E0BAE223C470D0040E2A5;
 			productRefGroup = 144E0BB9223C470D0040E2A5 /* Products */;
@@ -453,7 +455,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = company.tap.TapErrorReporting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -479,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = company.tap.TapErrorReporting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
